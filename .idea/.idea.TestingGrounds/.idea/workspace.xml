@@ -21,6 +21,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="CppUnrealEngineOptionsId" />
   </component>
   <component name="RunManager" selected="C++ Project.TestingGrounds">
     <configuration name="TestingGrounds" type="CppProject" factoryName="C++ Project">
@@ -254,10 +255,16 @@
       <workItem from="1636635578519" duration="2846000" />
       <workItem from="1636639001580" duration="54000" />
       <workItem from="1637067999917" duration="2295000" />
+      <workItem from="1637241935582" duration="1278000" />
+      <workItem from="1637243309065" duration="1872000" />
     </task>
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
