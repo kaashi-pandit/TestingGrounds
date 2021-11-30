@@ -6,6 +6,7 @@ public class TestingGrounds : ModuleRules
 {
 	public TestingGrounds(ReadOnlyTargetRules Target) : base(Target)
 	{
+		bUseUnity = false;
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[]

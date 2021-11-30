@@ -1,20 +1,27 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "ChooseNextWaypoint.h"
-
 #include "AIController.h"
-#include "PatrollingGuard.h"
+//#include "PatrollingGuard.h"
+#include "PatrolRoute.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	//Get the patrol points
-	const auto AIController = OwnerComp.GetAIOwner();
-	const auto ControlledPawn = AIController->GetPawn();
-	const auto PatrollingGuard = Cast<APatrollingGuard>(ControlledPawn);
-	auto PatrolPoints = PatrollingGuard->PatrolPointsCPP;
+	//Get the patrol points	
+	const auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
+	const auto PatrolRoute = ControlledPawn->FindComponentByClass<UPatrolRoute>();
 
+	if (!ensure(PatrolRoute))
+	{
+		return EBTNodeResult::Failed;
+	}
+	auto PatrolPoints = PatrolRoute->GetPatrolPoints();
+
+	if (PatrolPoints.Num() == 0)
+	{
+		UE_LOG(LogTemp, Error, TEXT("A guard is missing patrol points"));
+		return EBTNodeResult::Failed;
+	}
+	
 	//Set next waypoint
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
 
