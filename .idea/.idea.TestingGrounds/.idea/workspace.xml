@@ -11,6 +11,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="208VVRVk8DebTIRt4LhmxlpfHmU" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -18,6 +21,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -238,6 +243,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c03491f9-0533-4d5a-ae54-7e4873f342b5" name="Changes" comment="" />
@@ -257,11 +265,32 @@
       <workItem from="1637067999917" duration="2295000" />
       <workItem from="1637241935582" duration="1278000" />
       <workItem from="1637243309065" duration="1872000" />
+      <workItem from="1637588566231" duration="595000" />
+      <workItem from="1637756324327" duration="535000" />
+      <workItem from="1637757107166" duration="2600000" />
+      <workItem from="1637845584493" duration="238000" />
+      <workItem from="1637845978230" duration="2787000" />
+      <workItem from="1638278958200" duration="2000" />
+      <workItem from="1638279039113" duration="2340000" />
+      <workItem from="1638882701630" duration="1589000" />
+      <workItem from="1638969938782" duration="1104000" />
     </task>
     <servers />
   </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
