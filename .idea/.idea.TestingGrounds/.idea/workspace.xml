@@ -26,6 +26,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Source/TestingGrounds" />
     <property name="settings.editor.selected.configurable" value="CppUnrealEngineOptionsId" />
   </component>
   <component name="RunManager" selected="C++ Project.TestingGrounds">
@@ -285,6 +286,7 @@
       <workItem from="1640176779429" duration="250000" />
       <workItem from="1640259914874" duration="594000" />
       <workItem from="1640609268185" duration="1279000" />
+      <workItem from="1640695046945" duration="1307000" />
     </task>
     <servers />
   </component>
