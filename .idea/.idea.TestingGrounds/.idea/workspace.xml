@@ -287,6 +287,8 @@
       <workItem from="1640259914874" duration="594000" />
       <workItem from="1640609268185" duration="1279000" />
       <workItem from="1640695046945" duration="1307000" />
+      <workItem from="1640781825181" duration="620000" />
+      <workItem from="1640784983726" duration="2161000" />
     </task>
     <servers />
   </component>
@@ -302,11 +304,6 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/TestingGrounds/Player/FirstPersonCharacter.h</url>
-          <line>67</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

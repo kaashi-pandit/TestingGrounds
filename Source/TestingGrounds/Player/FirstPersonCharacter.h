@@ -23,13 +23,13 @@ class AFirstPersonCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
 	USkeletalMeshComponent* Mesh1P;
 
-	/** Gun mesh: 1st person view (seen only by self) */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	USkeletalMeshComponent* FP_Gun;
-
-	/** Location on gun mesh where projectiles should spawn. */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	USceneComponent* FP_MuzzleLocation;
+	// /** Gun mesh: 1st person view (seen only by self) */
+	// UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	// USkeletalMeshComponent* FP_Gun;
+	//
+	// /** Location on gun mesh where projectiles should spawn. */
+	// UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	// USceneComponent* FP_MuzzleLocation;
 
 	/** Gun mesh: VR view (attached to the VR controller directly, no arm, just the actual gun) */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
@@ -70,17 +70,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
 	FVector GunOffset;
 
-	/** Projectile class to spawn */
-	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	TSubclassOf<class ABallProjectile> ProjectileClass;
-
-	/** Sound to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
-	USoundBase* FireSound;
-
-	/** AnimMontage to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	UAnimMontage* FireAnimation;
+	// /** Projectile class to spawn */
+	// UPROPERTY(EditDefaultsOnly, Category=Projectile)
+	// TSubclassOf<class ABallProjectile> ProjectileClass;
+	//
+	// /** Sound to play each time we fire */
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	// USoundBase* FireSound;
+	//
+	// /** AnimMontage to play each time we fire */
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	// UAnimMontage* FireAnimation;
 
 	/** Whether to use motion controller location for aiming. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
@@ -88,8 +88,8 @@ public:
 
 protected:
 	
-	/** Fires a projectile. */
-	void OnFire();
+	// /** Fires a projectile. */
+	// void OnFire();
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
