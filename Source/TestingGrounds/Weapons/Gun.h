@@ -22,8 +22,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	void OnFire();
+	virtual void Tick(float DeltaTime) override;	
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
@@ -46,4 +45,10 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	USkeletalMeshComponent* FP_Gun;
+
+	UFUNCTION(BlueprintCallable, Category= "Input")
+	void OnFire();
+
+	void OnGunShot();
+	bool IsAllowGunShot = true;	
 };

@@ -38,6 +38,9 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::OnFire()
 {
+	// if (!IsAllowGunShot)
+	// 	return;
+	
 	// try and fire a projectile
 	if (ProjectileClass != nullptr)
 	{
@@ -72,5 +75,14 @@ void AGun::OnFire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
+
+	// IsAllowGunShot = false;
+	//
+	// FTimerHandle Timer;
+	// GetWorld()->GetTimerManager().SetTimer(Timer, this, &AGun::OnGunShot, 5);
 }
 
+void AGun::OnGunShot()
+{
+	IsAllowGunShot = true;
+}
