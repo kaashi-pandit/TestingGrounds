@@ -14,6 +14,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://K:/UE4/UE_5.0EA/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectPtr.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://K:/UE4/UE_5.0EA/Engine/Source/Runtime/Core/Public/Math/TransformVectorized.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://K:/UE4/UE_5.0EA/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://K:/UE4/UE_5.0EA/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="208VVRVk8DebTIRt4LhmxlpfHmU" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -21,6 +27,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.35019764" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -294,6 +302,8 @@
       <workItem from="1641099267958" duration="290000" />
       <workItem from="1641818322514" duration="1833000" />
       <workItem from="1641906234317" duration="594000" />
+      <workItem from="1644239351466" duration="4679000" />
+      <workItem from="1644411097151" duration="1456000" />
     </task>
     <servers />
   </component>
