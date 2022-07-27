@@ -39,6 +39,11 @@ void AMannequin::BeginPlay()
 	Gun = GetWorld()->SpawnActor<AGun>(GunBlueprint);
 	Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); //Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
 	Gun->AnimInstance = Mesh1P->GetAnimInstance();
+
+	if (PlayerInputComponent != nullptr)
+	{
+		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMannequin::PullTrigger);
+	}
 }
 
 // Called every frame
@@ -49,13 +54,13 @@ void AMannequin::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void AMannequin::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AMannequin::SetupPlayerInputComponent(UInputComponent* PlayerInputComp)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	Super::SetupPlayerInputComponent(PlayerInputComp);	
+	PlayerInputComponent = PlayerInputComp;
 }
 
-void AMannequin::Fire()
+void AMannequin::PullTrigger()
 {
 	Gun->OnFire();
 }

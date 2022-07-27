@@ -33,7 +33,7 @@ public:
 	TSubclassOf<class AGun> GunBlueprint;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void Fire();
+	void PullTrigger();
 
 private:
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
@@ -46,5 +46,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	AGun* Gun;
+
+	UPROPERTY()
+	UInputComponent* PlayerInputComponent;
 
 };
