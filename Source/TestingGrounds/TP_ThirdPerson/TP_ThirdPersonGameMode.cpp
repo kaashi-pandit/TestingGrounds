@@ -5,8 +5,8 @@
 
 ATP_ThirdPersonGameMode::ATP_ThirdPersonGameMode()
 {
-	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/AnimStarterPack/Blueprints/ThirdPerson_BP"));	
+	// set default pawn class to our Blueprinted character	
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Static/Blueprints/ThirdPerson_BP"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
