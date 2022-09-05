@@ -11,13 +11,19 @@ ATerrain::ATerrain()
 
 }
 
-void ATerrain::PlaceActors()
+void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn)
 {
 	FBox Bounds(MinArea, MaxArea);
 
-	for (size_t i = 0; i < 20; i++)
+	int NumberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
+	
+	for (size_t i = 0; i < NumberToSpawn; i++)
 	{
 		FVector SpawnPoint = FMath::RandPointInBox(Bounds);
+		AActor* Spawned = GetWorld()->SpawnActor<AActor>(ToSpawn);
+		Spawned->SetActorRelativeLocation(SpawnPoint);
+		Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+
 		UE_LOG(LogTemp, Warning, TEXT("SpawnPoint: %s"), *SpawnPoint.ToCompactString());
 	}	
 }
