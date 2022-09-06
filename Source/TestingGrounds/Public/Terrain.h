@@ -31,5 +31,7 @@ protected:
 	UPROPERTY(EditAnyWhere, Category = "SpawnArea")
 	FVector MaxArea {4000, 2000, 0};
 	
+private:
 
+	bool CastSphere(FVector Location, float Radius);
 };
