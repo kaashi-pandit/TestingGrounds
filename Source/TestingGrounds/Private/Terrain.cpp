@@ -22,7 +22,7 @@ void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpa
 		Spawned->SetActorRelativeLocation(SpawnPoint);
 		Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 
-		UE_LOG(LogTemp, Warning, TEXT("SpawnPoint: %s"), *SpawnPoint.ToCompactString());
+		//UE_LOG(LogTemp, Warning, TEXT("SpawnPoint: %s"), *SpawnPoint.ToCompactString());
 	}	
 }
 
@@ -36,6 +36,7 @@ void ATerrain::BeginPlay()
 
 bool ATerrain::CastSphere(FVector Location, float Radius)
 {
+	Location += FVector(0,0,0);
 	FHitResult HitResult;
 
 	bool HasHit = GetWorld()->SweepSingleByChannel
@@ -44,11 +45,17 @@ bool ATerrain::CastSphere(FVector Location, float Radius)
 		Location,
 		Location,
 		FQuat::Identity,
-		ECollisionChannel::ECC_Camera,
+		ECollisionChannel::ECC_GameTraceChannel2,
 		FCollisionShape::MakeSphere(Radius)
 	);
 
 	FColor ResultColor = HasHit ? FColor::Red : FColor::Green;
+
+	if (HasHit)
+	{
+		auto NameHai = HitResult.GetActor()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("Hit hua actor: %s"), *NameHai);
+	}
 
 	DrawDebugSphere
 	(
@@ -60,7 +67,7 @@ bool ATerrain::CastSphere(FVector Location, float Radius)
 		true,
 		100
 	);
-
+	
 	return HasHit;
 }
 
