@@ -15,11 +15,15 @@ public:
 	// Sets default values for this actor's properties
 	ATerrain();
 
+	UFUNCTION(BlueprintCallable, Category = "Randomness")
+	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius);
+
+	void PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint);
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Randomness")
-	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn);
+	bool FindEmptyLocation(FVector& OutLocation, float Radius);
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,5 +37,5 @@ protected:
 	
 private:
 
-	bool CastSphere(FVector Location, float Radius);
+	bool CanSpawnAtLocation(FVector Location, float Radius);
 };

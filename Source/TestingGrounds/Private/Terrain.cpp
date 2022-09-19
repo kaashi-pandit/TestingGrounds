@@ -9,41 +9,67 @@ ATerrain::ATerrain()
 
 }
 
-void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn)
+void ATerrain::BeginPlay()
 {
-	FBox Bounds(MinArea, MaxArea);
+	Super::BeginPlay();
 
+	CanSpawnAtLocation(GetActorLocation(), 300);
+}
+
+void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius)
+{
 	int NumberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
 	
 	for (size_t i = 0; i < NumberToSpawn; i++)
 	{
-		FVector SpawnPoint = FMath::RandPointInBox(Bounds);
-		AActor* Spawned = GetWorld()->SpawnActor<AActor>(ToSpawn);
-		Spawned->SetActorRelativeLocation(SpawnPoint);
-		Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+		FVector SpawnPoint;
+		bool Found = FindEmptyLocation(SpawnPoint, Radius);
+
+		if (Found)
+		{
+			PlaceActor(ToSpawn, SpawnPoint);
+		}
 
 		//UE_LOG(LogTemp, Warning, TEXT("SpawnPoint: %s"), *SpawnPoint.ToCompactString());
 	}	
 }
 
-// Called when the game starts or when spawned
-void ATerrain::BeginPlay()
+void ATerrain::PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint)
 {
-	Super::BeginPlay();
-	
-	CastSphere(GetActorLocation(),300);
+	AActor* Spawned = GetWorld()->SpawnActor<AActor>(ToSpawn);
+	Spawned->SetActorRelativeLocation(SpawnPoint);
+	Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 }
 
-bool ATerrain::CastSphere(FVector Location, float Radius)
+bool ATerrain::FindEmptyLocation(FVector& OutLocation, float Radius)
 {
-	Location += FVector(0,0,0);
+	FBox Bounds(MinArea, MaxArea);
+
+	const int MAX_ATTEMPTS = 100;
+	for (size_t i = 0; i < MAX_ATTEMPTS; i++)
+	{
+		FVector CandidatePoint = FMath::RandPointInBox(Bounds);
+
+		if (CanSpawnAtLocation(CandidatePoint, Radius))
+		{
+			OutLocation = CandidatePoint;	
+			return true;
+		}
+	}
+	return false;
+}
+
+bool ATerrain::CanSpawnAtLocation(FVector Location, float Radius)
+{	
 	FHitResult HitResult;
+
+	FVector GlobalLocation = ActorToWorld().TransformPosition(Location);
 
 	bool HasHit = GetWorld()->SweepSingleByChannel
 	(
 		HitResult,
-		Location,
-		Location,
+		GlobalLocation,
+		GlobalLocation,
 		FQuat::Identity,
 		ECollisionChannel::ECC_GameTraceChannel2,
 		FCollisionShape::MakeSphere(Radius)
@@ -57,18 +83,19 @@ bool ATerrain::CastSphere(FVector Location, float Radius)
 		UE_LOG(LogTemp, Warning, TEXT("Hit hua actor: %s"), *NameHai);
 	}
 
-	DrawDebugSphere
+	DrawDebugCapsule
 	(
 		GetWorld(),
-		Location,
+		GlobalLocation,	
+		0,
 		Radius,
-		100,
+		FQuat::Identity,
 		ResultColor,
 		true,
 		100
 	);
 	
-	return HasHit;
+	return !HasHit;
 }
 
 // Called every frame
