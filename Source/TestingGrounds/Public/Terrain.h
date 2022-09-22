@@ -16,9 +16,9 @@ public:
 	ATerrain();
 
 	UFUNCTION(BlueprintCallable, Category = "Randomness")
-	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius);
+	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn = 1, int MaxSpawn = 1, float Radius = 150, float MinScale = 1, float MaxScale = 1);
 
-	void PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint);
+	void PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint, float Rotation, float Scale);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
