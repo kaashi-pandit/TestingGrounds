@@ -17,7 +17,8 @@ public class TestingGrounds : ModuleRules
 			"InputCore",
 			"HeadMountedDisplay",
 			"AIModule",
-			"GameplayTasks"
+			"GameplayTasks",
+			"NavigationSystem"
 		});
 	}
 }

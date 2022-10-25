@@ -1,6 +1,7 @@
 #include "Terrain.h"
 #include "DrawDebugHelpers.h"
 
+
 // Sets default values
 ATerrain::ATerrain()
 {
@@ -11,7 +12,7 @@ ATerrain::ATerrain()
 
 void ATerrain::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay();	
 
 	CanSpawnAtLocation(GetActorLocation(), 300);
 }
