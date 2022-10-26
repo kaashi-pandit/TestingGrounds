@@ -64,6 +64,12 @@ bool ATerrain::FindEmptyLocation(FVector& OutLocation, float Radius)
 	return false;
 }
 
+void ATerrain::SetPool(UActorPool* InPool)
+{
+	UE_LOG(LogTemp, Warning, TEXT("[%s] Setting Pool %s"), *(this->GetName()), *(InPool->GetName()));
+	Pool = InPool;
+}
+
 bool ATerrain::CanSpawnAtLocation(FVector Location, float Radius)
 {	
 	FHitResult HitResult;

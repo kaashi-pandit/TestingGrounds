@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "TestingGrounds/TestingGroundsGameMode.h"
 #include "NavMesh/NavMeshBoundsVolume.h"
+#include "ActorPool.h"
 #include "InfiniteTerrainGameMode.generated.h"
 
 
@@ -16,9 +17,16 @@ class TESTINGGROUNDS_API AInfiniteTerrainGameMode : public ATestingGroundsGameMo
 {
 	GENERATED_BODY()
 
+	AInfiniteTerrainGameMode();
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "Bounds Pool")
 	void PopulateBoundsVolumePool();
+
+protected:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pool")
+	class UActorPool* NavMeshBoundVolumePool;
 
 private:
 	void AddToPool(ANavMeshBoundsVolume* VolumeToAdd);

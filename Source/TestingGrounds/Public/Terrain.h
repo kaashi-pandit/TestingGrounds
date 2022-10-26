@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ActorPool.h"
 #include "Terrain.generated.h"
+
 
 UCLASS()
 class TESTINGGROUNDS_API ATerrain : public AActor
@@ -25,6 +27,9 @@ public:
 
 	bool FindEmptyLocation(FVector& OutLocation, float Radius);
 
+	UFUNCTION(BlueprintCallable, Category = "Pool")
+	void SetPool(UActorPool* Pool);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,4 +43,6 @@ protected:
 private:
 
 	bool CanSpawnAtLocation(FVector Location, float Radius);
+
+	UActorPool* Pool;
 };
