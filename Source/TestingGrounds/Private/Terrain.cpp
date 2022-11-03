@@ -17,6 +17,13 @@ void ATerrain::BeginPlay()
 	CanSpawnAtLocation(GetActorLocation(), 300);
 }
 
+void ATerrain::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	Pool->Return(NavMeshBoundsVolume);	
+}
+
+
 void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale)
 {
 	int NumberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
@@ -43,7 +50,7 @@ void ATerrain::PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint, float
 	Spawned->SetActorRelativeLocation(SpawnPoint);
 	Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 	Spawned->SetActorRotation(FRotator(0,Rotation, 0));
-	Spawned ->SetActorScale3D(FVector(Scale));
+	Spawned->SetActorScale3D(FVector(Scale));
 }
 
 bool ATerrain::FindEmptyLocation(FVector& OutLocation, float Radius)
@@ -68,6 +75,19 @@ void ATerrain::SetPool(UActorPool* InPool)
 {
 	UE_LOG(LogTemp, Warning, TEXT("[%s] Setting Pool %s"), *(this->GetName()), *(InPool->GetName()));
 	Pool = InPool;
+
+	PositionNavMeshBoundsVolume();
+}
+
+void ATerrain::PositionNavMeshBoundsVolume()
+{
+	NavMeshBoundsVolume = Pool->CheckOut();
+	if (NavMeshBoundsVolume == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Not enough actors in pool"));
+		return;
+	}
+	NavMeshBoundsVolume->SetActorLocation(GetActorLocation());
 }
 
 bool ATerrain::CanSpawnAtLocation(FVector Location, float Radius)
