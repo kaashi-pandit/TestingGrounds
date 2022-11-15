@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "NavigationSystem.h"
 #include "DrawDebugHelpers.h"
 
 
@@ -8,6 +9,7 @@ ATerrain::ATerrain()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	NavigationBoundOffset = FVector(2000,0,0);
 }
 
 void ATerrain::BeginPlay()
@@ -84,10 +86,16 @@ void ATerrain::PositionNavMeshBoundsVolume()
 	NavMeshBoundsVolume = Pool->CheckOut();
 	if (NavMeshBoundsVolume == nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("Not enough actors in pool"));
+		UE_LOG(LogTemp, Error, TEXT("[%s] Not enough actors in pool"), *GetName());
 		return;
 	}
-	NavMeshBoundsVolume->SetActorLocation(GetActorLocation());
+	UE_LOG(LogTemp, Error, TEXT("[%s] Checked out: %s"), *GetName(), *NavMeshBoundsVolume->GetName());
+	NavMeshBoundsVolume->SetActorLocation(GetActorLocation() + NavigationBoundOffset);
+	auto Nav1 = Cast<UNavigationSystemV1>(GetWorld()->GetNavigationSystem());
+	Nav1->Build();
+
+	UE_LOG(LogTemp, Error, TEXT("BUILD NAVMESH !!"));
+	
 }
 
 bool ATerrain::CanSpawnAtLocation(FVector Location, float Radius)

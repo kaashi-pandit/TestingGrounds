@@ -44,6 +44,9 @@ protected:
 	UPROPERTY(EditAnyWhere, Category = "SpawnArea")
 	FVector MaxArea {4000, 2000, 0};
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Navigation")
+	FVector NavigationBoundOffset;
+
 private:
 
 	bool CanSpawnAtLocation(FVector Location, float Radius);
