@@ -25,34 +25,63 @@ void ATerrain::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Pool->Return(NavMeshBoundsVolume);	
 }
 
+TArray<FSpawnPostion> ATerrain::RandomSpawnPositions(int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale)
+{
+	TArray<FSpawnPostion> SpawnPositions;
+	int NumberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
+
+	for (size_t i = 0; i < NumberToSpawn; i++)
+	{
+		FSpawnPostion SpawnPosition;
+		SpawnPosition.Scale = FMath::RandRange(MinScale, MaxScale);
+		bool Found = FindEmptyLocation(SpawnPosition.Location, Radius * SpawnPosition.Scale);
+
+		if (Found)
+		{
+			SpawnPosition.Rotation = FMath::FRandRange(-180, 180);
+			SpawnPositions.Add(SpawnPosition);
+			//PlaceActor(ToSpawn, SpawnPosition);
+		}
+	}
+	return SpawnPositions;
+}
+
 
 void ATerrain::PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale)
 {
-	int NumberToSpawn = FMath::RandRange(MinSpawn, MaxSpawn);
-	
-	for (size_t i = 0; i < NumberToSpawn; i++)
+	TArray<FSpawnPostion> SpawnPos = RandomSpawnPositions(MinSpawn, MaxSpawn, Radius, MinScale, MaxScale);
+	for (auto SpawnPoint : SpawnPos)
 	{
-		FVector SpawnPoint;
-		float RandScale = FMath::RandRange(MinScale, MaxScale);
-		bool Found = FindEmptyLocation(SpawnPoint, Radius * RandScale);
-		
-		if (Found)
-		{
-			float RandomRotation = FMath::FRandRange(-180, 180);
-			PlaceActor(ToSpawn, SpawnPoint, RandomRotation, RandScale);
-		}
-
-		//UE_LOG(LogTemp, Warning, TEXT("SpawnPoint: %s"), *SpawnPoint.ToCompactString());
-	}	
+		PlaceActor(ToSpawn, SpawnPoint);
+	}
 }
 
-void ATerrain::PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint, float Rotation, float Scale)
+void ATerrain::PlaceAIPawns(TSubclassOf<APawn> ToSpawn, int MinSpawn, int MaxSpawn, float Radius)
+{
+	TArray<FSpawnPostion> AISpawnPos = RandomSpawnPositions(MinSpawn, MaxSpawn, Radius, 1,1);
+	for (auto SpawnPoint : AISpawnPos)
+	{
+		PlaceAIPawn(ToSpawn, SpawnPoint);
+	}
+}
+
+void ATerrain::PlaceAIPawn(TSubclassOf<APawn>& ToSpawn, FSpawnPostion& SpawnPoint)
+{
+	APawn* Spawned = GetWorld()->SpawnActor<APawn>(ToSpawn);
+	Spawned->SetActorRelativeLocation(SpawnPoint.Location);
+	Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+	Spawned->SetActorRotation(FRotator(0, SpawnPoint.Rotation, 0));
+	Spawned->SpawnDefaultController();
+	Spawned->Tags.Add(FName("Enemy"));
+}
+
+void ATerrain::PlaceActor(TSubclassOf<AActor> ToSpawn, FSpawnPostion& SpawnPos)
 {
 	AActor* Spawned = GetWorld()->SpawnActor<AActor>(ToSpawn);
-	Spawned->SetActorRelativeLocation(SpawnPoint);
+	Spawned->SetActorRelativeLocation(SpawnPos.Location);
 	Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
-	Spawned->SetActorRotation(FRotator(0,Rotation, 0));
-	Spawned->SetActorScale3D(FVector(Scale));
+	Spawned->SetActorRotation(FRotator(0, SpawnPos.Rotation, 0));
+	Spawned->SetActorScale3D(FVector(SpawnPos.Scale));
 }
 
 bool ATerrain::FindEmptyLocation(FVector& OutLocation, float Radius)

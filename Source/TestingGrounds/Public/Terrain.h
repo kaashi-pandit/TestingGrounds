@@ -7,6 +7,20 @@
 #include "ActorPool.h"
 #include "Terrain.generated.h"
 
+USTRUCT()
+struct FSpawnPostion
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY()
+	FVector Location;
+
+	UPROPERTY()
+	float Rotation;
+
+	UPROPERTY()
+	float Scale;
+};
 
 UCLASS()
 class TESTINGGROUNDS_API ATerrain : public AActor
@@ -17,10 +31,14 @@ public:
 	// Sets default values for this actor's properties
 	ATerrain();
 
-	UFUNCTION(BlueprintCallable, Category = "Randomness")
-	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn = 1, int MaxSpawn = 1, float Radius = 150, float MinScale = 1, float MaxScale = 1);
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void PlaceActors(TSubclassOf<AActor> ToSpawn, int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale);
 
-	void PlaceActor(TSubclassOf<AActor> ToSpawn, FVector SpawnPoint, float Rotation, float Scale);
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	void PlaceAIPawns(TSubclassOf<APawn> ToSpawn, int MinSpawn, int MaxSpawn, float Radius);
+
+	void PlaceAIPawn(TSubclassOf<APawn>& ToSpawn, FSpawnPostion& SpawnPoint);
+
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -37,6 +55,10 @@ protected:
 	virtual void BeginPlay() override;
 	
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	void PlaceActor(TSubclassOf<AActor> ToSpawn, FSpawnPostion& SpawnPos);
+
+	TArray<FSpawnPostion> RandomSpawnPositions(int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale);
 
 	UPROPERTY(EditAnyWhere, Category = "SpawnArea")
 	FVector MinArea {0,-2000,0};
